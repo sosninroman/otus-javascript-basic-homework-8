@@ -18,6 +18,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           message: |
-            You can check this code at CodeSandbox with the link
+            🎮 CodeSandbox:
             https://githubbox.com/${{ github.repository }}/tree/${{ github.head_ref }}/src
           message-id: code-sandbox-link
