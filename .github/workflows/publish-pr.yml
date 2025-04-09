@@ -7,6 +7,7 @@ on:
 permissions:
   contents: write
   pages: write
+  pull-requests: write
 
 jobs:
   deploy:
@@ -21,3 +22,13 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./src
           destination_dir: pr-${{ github.event.pull_request.number }}
+
+      - name: Add comment with URL
+        uses: mshick/add-pr-comment@v2
+        if: success()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          message: |
+            🚀 Preview deployed! Visit: 
+            https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-${{ github.event.pull_request.number }}/
